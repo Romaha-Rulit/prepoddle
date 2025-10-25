@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПреподГейм | Угадай преподавателя</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --card-bg: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, #4361ee, #3a0ca3);
+            --status-bg: #e3f2fd;
+            --demanding-bg: #fff3e0;
+            --institute-bg: #e8f5e8;
+            --behavior-bg: #f3e5f5;
+            --rarity-bg: #fff8e1;
+            --gender-bg: #fce4ec;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 20px;
+            background: var(--gradient);
+            color: white;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+        
+        .stat-card {
+            text-align: center;
+            flex: 1;
+            padding: 15px;
+        }
+        
+        .stat-card:not(:last-child) {
+            border-right: 1px solid #eee;
+        }
+        
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* ВЕРТИКАЛЬНОЕ РАСПОЛОЖЕНИЕ БЛОКОВ */
+        .game-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .game-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+        
+        .input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 18px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+        
+        input:focus {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            outline: none;
+        }
+        
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 10;
+            display: none;
+            border: 1px solid #e9ecef;
+        }
+        
+        .suggestion {
+            padding: 15px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #f1f3f4;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .suggestion:hover {
+            background: #f8f9fa;
+            transform: translateX(5px);
+        }
+        
+        .suggestion:last-child {
+            border-bottom: none;
+        }
+        
+        .suggestion-content {
+            flex: 1;
+        }
+        
+        .suggestion-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .suggestion-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        .suggestion-detail {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .suggestion-detail i {
+            width: 16px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        
+        .suggestion-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            padding: 16px 30px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex: 1;
+        }
+        
+        #guess-btn {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        #guess-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+        
+        #hint-btn {
+            background: #f8f9fa;
+            color: var(--dark);
+            border: 2px solid #e9ecef;
+        }
+        
+        #hint-btn:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--primary);
+        }
+        
+        .results-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .result-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            gap: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            transition: all 0.3s;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .result-row:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .result-header {
+            background: var(--gradient);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+        
+        .result-cell {
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            gap: 8px;
+        }
+        
+        .result-cell-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        
+        .status-icon { background: #2196f3; color: white; }
+        .demanding-icon { background: #ff9800; color: white; }
+        .institute-icon { background: #4caf50; color: white; }
+        .behavior-icon { background: #9c27b0; color: white; }
+        .rarity-icon { background: #ffc107; color: white; }
+        .gender-icon { background: #e91e63; color: white; }
+        
+        .correct {
+            background: rgba(76, 201, 240, 0.15);
+            border-left: 4px solid var(--success);
+        }
+        
+        .incorrect {
+            background: rgba(247, 37, 133, 0.08);
+            border-left: 4px solid var(--warning);
+        }
+        
+        .hint-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .hint-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .hint-text {
+            flex: 1;
+        }
+        
+        .countdown-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .countdown-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--gray);
+        }
+        
+        .countdown-timer {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Courier New', monospace;
+        }
+        /* СТИЛИ ДЛЯ ИСТОРИИ ПОПЫТОК С ХАРАКТЕРИСТИКАМИ */
+.attempt-container {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.attempt-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f1f3f4;
+}
+
+.attempt-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 3px solid transparent;
+}
+
+.attempt-avatar.correct {
+    border-color: var(--success);
+}
+
+.attempt-avatar.incorrect {
+    border-color: var(--warning);
+}
+
+.attempt-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.attempt-teacher-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.attempt-characteristics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 0;
+}
+
+.attempt-characteristic {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.attempt-characteristic.correct {
+    border-left: 4px solid var(--success);
+    background: rgba(76, 201, 240, 0.15);
+}
+
+.attempt-characteristic.incorrect {
+    border-left: 4px solid var(--warning);
+    background: rgba(247, 37, 133, 0.08);
+}
+
+.attempt-characteristic:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* Адаптивность для истории */
+@media (max-width: 768px) {
+    .attempt-characteristics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .attempt-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .attempt-teacher-name {
+        font-size: 1.1rem;
+    }
+}
+        
+        /* ОБНОВЛЕННЫЕ СТИЛИ ДЛЯ ХАРАКТЕРИСТИК */
+        .characteristics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .characteristic {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .characteristic:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+        
+        .char-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 1.8rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .char-hint {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.08;
+            z-index: 1;
+            transition: all 0.3s;
+        }
+        
+        .char-hint.top {
+            top: 5px;
+            right: 10px;
+        }
+        
+        .char-hint.bottom {
+            bottom: 5px;
+            left: 10px;
+        }
+        
+        .characteristic:hover .char-hint {
+            opacity: 0.15;
+            transform: scale(1.1);
+        }
+        
+        .char-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 8px 0 4px;
+            min-height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .char-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Индивидуальные стили для каждой характеристики */
+        .char-status {
+            background: var(--status-bg);
+            border-color: #2196f3;
+        }
+        
+        .char-status .char-icon {
+            background: linear-gradient(135deg, #2196f3, #1976d2);
+            color: white;
+        }
+        
+        .char-demanding {
+            background: var(--demanding-bg);
+            border-color: #ff9800;
+        }
+        
+        .char-demanding .char-icon {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: white;
+        }
+        
+        .char-institute {
+            background: var(--institute-bg);
+            border-color: #4caf50;
+        }
+        
+        .char-institute .char-icon {
+            background: linear-gradient(135deg, #4caf50, #388e3c);
+            color: white;
+        }
+        
+        .char-behavior {
+            background: var(--behavior-bg);
+            border-color: #9c27b0;
+        }
+        
+        .char-behavior .char-icon {
+            background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+            color: white;
+        }
+        
+        .char-rarity {
+            background: var(--rarity-bg);
+            border-color: #ffc107;
+        }
+        
+        .char-rarity .char-icon {
+            background: linear-gradient(135deg, #ffc107, #ffa000);
+            color: white;
+        }
+        
+        .char-gender {
+            background: var(--gender-bg);
+            border-color: #e91e63;
+        }
+        
+        .char-gender .char-icon {
+            background: linear-gradient(135deg, #e91e63, #c2185b);
+            color: white;
+        }
+        
+        /* Анимация появления значения */
+        @keyframes valueReveal {
+            0% { transform: scale(0.8); opacity: 0; }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .char-value.revealed {
+            animation: valueReveal 0.6s ease-out;
+            color: var(--primary);
+        }
+        
+        /* СТИЛИ ДЛЯ ТАБЛИЦЫ ПРЕПОДАВАТЕЛЕЙ */
+        .teachers-table-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .table-header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 20px;
+        }
+        
+        .table-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .table-subtitle {
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+        
+        th {
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        th:last-child {
+            border-right: none;
+        }
+        
+        tbody tr {
+            border-bottom: 1px solid #ecf0f1;
+            transition: all 0.3s ease;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        td {
+            padding: 12px 12px;
+            font-size: 0.85rem;
+            border-right: 1px solid #ecf0f1;
+        }
+        
+        td:last-child {
+            border-right: none;
+        }
+        
+        .version-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+            min-width: 70px;
+        }
+        
+        .version-1 { background: #e74c3c; color: white; }
+        .version-2 { background: #e67e22; color: white; }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .status-yes { 
+            background: rgba(46, 204, 113, 0.15); 
+            color: #27ae60; 
+            border: 1px solid #2ecc71;
+        }
+        
+        .status-no { 
+            background: rgba(231, 76, 60, 0.15); 
+            color: #c0392b; 
+            border: 1px solid #e74c3c;
+        }
+        
+        .rarity-high {
+            color: #e74c3c;
+            font-weight: 700;
+        }
+        
+        .rarity-medium {
+            color: #e67e22;
+            font-weight: 600;
+        }
+        
+        .rarity-low {
+            color: #27ae60;
+            font-weight: 600;
+        }
+        
+        .institute-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #3498db;
+            color: white;
+        }
+        
+        .table-search {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+        }
+        
+        @media (max-width: 768px) {
+            .game-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .stat-card:not(:last-child) {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 20px;
+            }
+            
+            .result-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .result-header {
+                display: none;
+            }
+            
+            .result-cell {
+                display: flex;
+                justify-content: space-between;
+                padding: 8px 0;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .result-cell:last-child {
+                border-bottom: none;
+            }
+            
+            .result-cell::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: var(--gray);
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .characteristics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .suggestion-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .table-container {
+                overflow-x: auto;
+            }
+            
+            table {
+                min-width: 800px;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+        }
+        .suggestion {
+    padding: 15px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #f1f3f4;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 60px;
+}
+
+.suggestion-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.suggestion-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+
+.suggestion-details {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+}
+
+.suggestion-detail {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: var(--gray);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    justify-content: flex-start;
+}
+
+.suggestion-detail i {
+    width: 16px;
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.8;
+    flex-shrink: 0;
+}
+
+.suggestion-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .suggestion-details {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+    
+    .suggestion-detail {
+        font-size: 0.75rem;
+        gap: 4px;
+    }
+    
+    .suggestion-detail i {
+        font-size: 0.7rem;
+        width: 14px;
+    }
+    
+    .suggestion {
+        padding: 12px 15px;
+        min-height: 50px;
+    }
+}
+        
+        /* Анимации */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Кастомный скроллбар */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+        
+        /* Эффект победы */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary);
+            opacity: 0;
+            animation: confetti-fall 5s linear forwards;
+            z-index: 1000;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-chalkboard-teacher"></i> ПреподГейм</h1>
+            <p class="subtitle">Угадай преподавателя по характеристикам. Новый преподаватель каждый день!</p>
+        </header>
+        
+        <div class="game-stats">
+            <div class="stat-card">
+                <div class="stat-value" id="day">157</div>
+                <div class="stat-label">День игры</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="attempts">0</div>
+                <div class="stat-label">Попытки</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="streak">5</div>
+                <div class="stat-label">Серия побед</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="success-rate">87%</div>
+                <div class="stat-label">Успешность</div>
+            </div>
+        </div>
+        
+        <!-- ВЕРТИКАЛЬНОЕ РАСПОЛОЖЕНИЕ ВСЕХ БЛОКОВ -->
+        <div class="game-sections">
+            <!-- БЛОК УГАДЫВАНИЯ -->
+            <div class="game-section">
+                <h2 class="section-title"><i class="fas fa-search"></i> Кто сегодняшний преподаватель?</h2>
+                
+                <div class="input-container">
+                    <input type="text" id="teacher-input" placeholder="Начните вводить имя преподавателя...">
+                    <div class="suggestions" id="suggestions"></div>
+                </div>
+                
+                <div class="controls">
+                    <button id="guess-btn">
+                        <i class="fas fa-paper-plane"></i> Проверить
+                    </button>
+                    
+                </div>
+                
+                <!-- ХАРАКТЕРИСТИКИ -->
+                
+            </div>
+            
+            <!-- БЛОК ИСТОРИИ ПОПЫТОК -->
+            <div class="game-section">
+                <h2 class="section-title"><i class="fas fa-history"></i> История попыток</h2>
+                <div class="results-container">
+                    
+                    <div id="results-container"></div>
+                </div>
+            </div>
+            
+
+                
+        </div>
+        
+        <!-- ПОДСКАЗКИ И ТАЙМЕР -->
+        <div class="hint-section">
+            <div class="hint-icon">
+                <i class="fas fa-info"></i>
+            </div>
+            <div class="hint-text" id="hint">
+                Начните вводить имя преподавателя, чтобы увидеть подсказки. Зеленый цвет означает правильную характеристику, розовый - неправильную.
+            </div>
+        </div>
+        
+        <div class="countdown-section">
+            <div class="countdown-title">Следующий преподаватель через:</div>
+            <div class="countdown-timer" id="countdown">23:59:42</div>
+        </div>
+    </div>
+
+    <script>
+        // ОБНОВЛЕННАЯ БАЗА ДАННЫХ С РЕДКОСТЬЮ
+        const teachers = [
+            {
+                name: "Иванов А.А.",
+                status: "Профессор",
+                demanding: "Высокая",
+                institute: "ИСИ",
+                behavior: "Особое",
+                rarity: "Редкая",
+                gender: "Мужской",
+                availability: "Активен",
+                iconColor: "#2196f3"
+            },
+            {
+                name: "Петрова Е.В.",
+                status: "Доцент",
+                demanding: "Средняя",
+                institute: "ИМЕиКН",
+                behavior: "Нейтральное",
+                rarity: "Обычная",
+                gender: "Женский",
+                availability: "Активен",
+                iconColor: "#e91e63"
+            },
+            {
+                name: "Сидоров П.С.",
+                status: "Профессор",
+                demanding: "Низкая",
+                institute: "ИСИ",
+                behavior: "Особое",
+                rarity: "Редкая",
+                gender: "Мужской",
+                availability: "Активен",
+                iconColor: "#2196f3"
+            },
+            {
+                name: "Козлова М.И.",
+                status: "Доцент",
+                demanding: "Высокая",
+                institute: "ИМЕиКН",
+                behavior: "Нейтральное",
+                rarity: "Обычная",
+                gender: "Женский",
+                availability: "В отпуске",
+                iconColor: "#e91e63"
+            },
+            {
+                name: "Николаев В.Г.",
+                status: "Профессор",
+                demanding: "Средняя",
+                institute: "ИСИ",
+                behavior: "Особое",
+                rarity: "Редкая",
+                gender: "Мужской",
+                availability: "Активен",
+                iconColor: "#2196f3"
+            },
+            {
+                name: "Смирнова О.П.",
+                status: "Доцент",
+                demanding: "Низкая",
+                institute: "ИМЕиКН",
+                behavior: "Нейтральное",
+                rarity: "Обычная",
+                gender: "Женский",
+                availability: "Активен",
+                iconColor: "#e91e63"
+            },
+            {
+                name: "Федоров Д.С.",
+                status: "Профессор",
+                demanding: "Высокая",
+                institute: "ИСИ",
+                behavior: "Нейтральное",
+                rarity: "Редкая",
+                gender: "Мужской",
+                availability: "Командировка",
+                iconColor: "#2196f3"
+            },
+            {
+                name: "Васнецова А.К.",
+                status: "Доцент",
+                demanding: "Средняя",
+                institute: "ИМЕиКН",
+                behavior: "Особое",
+                rarity: "Обычная",
+                gender: "Женский",
+                availability: "Активен",
+                iconColor: "#e91e63"
+            }
+        ];
+
+        // Переменные игры
+        let currentTeacher = null;
+        let attempts = 0;
+        let maxAttempts = 6;
+        let gameWon = false;
+        let gameDate = null;
+        let hintsGiven = 0;
+
+        // Элементы DOM
+        const teacherInput = document.getElementById('teacher-input');
+        const guessBtn = document.getElementById('guess-btn');
+        const suggestions = document.getElementById('suggestions');
+        const resultsContainer = document.getElementById('results-container');
+        const attemptsElement = document.getElementById('attempts');
+        const dayElement = document.getElementById('day');
+        const countdownElement = document.getElementById('countdown');
+        const hintElement = document.getElementById('hint');
+        const streakElement = document.getElementById('streak');
+        const successRateElement = document.getElementById('success-rate');
+        const teachersTableBody = document.getElementById('teachers-table-body');
+        const tableSearch = document.getElementById('table-search');
+        
+        
+
+        // Инициализация игры
+        function initGame() {
+            // Получаем текущую дату для определения преподавателя дня
+            const today = new Date().toDateString();
+            gameDate = today;
+            
+            // Сохраняем дату в localStorage
+            const savedDate = localStorage.getItem('teacherGameDate');
+            const savedTeacherIndex = localStorage.getItem('teacherIndex');
+            const savedAttempts = localStorage.getItem('teacherAttempts');
+            const savedResults = localStorage.getItem('teacherResults');
+            const savedStats = localStorage.getItem('teacherStats');
+            
+            // Загружаем статистику
+            let stats = savedStats ? JSON.parse(savedStats) : { wins: 0, total: 0, streak: 0, maxStreak: 0 };
+            updateStats(stats);
+            
+            // Если игра уже идет сегодня, восстанавливаем состояние
+            if (savedDate === today && savedTeacherIndex !== null) {
+                currentTeacher = teachers[parseInt(savedTeacherIndex)];
+                attempts = parseInt(savedAttempts) || 0;
+                
+                if (savedResults) {
+                    resultsContainer.innerHTML = savedResults;
+                }
+                
+                // Проверяем, выиграна ли уже игра
+                if (resultsContainer.querySelector('.correct')) {
+                    gameWon = true;
+                    hintElement.textContent = 'Поздравляем! Вы угадали преподавателя! Возвращайтесь завтра для новой игры.';
+                    guessBtn.disabled = true;
+                    teacherInput.disabled = true;
+                    revealTeacher();
+                } else if (attempts >= maxAttempts) {
+                    hintElement.textContent = `Игра окончена. Сегодняшний преподаватель: ${currentTeacher.name}. Возвращайтесь завтра!`;
+                    guessBtn.disabled = true;
+                    teacherInput.disabled = true;
+                    revealTeacher();
+                }
+            } else {
+                // Новая игра - выбираем случайного преподавателя
+                const teacherIndex = Math.floor(Math.random() * teachers.length);
+                currentTeacher = teachers[teacherIndex];
+                attempts = 0;
+                hintsGiven = 0;
+                
+                // Сохраняем в localStorage
+                localStorage.setItem('teacherGameDate', today);
+                localStorage.setItem('teacherIndex', teacherIndex);
+                localStorage.setItem('teacherAttempts', attempts);
+                localStorage.setItem('teacherResults', '');
+                
+                // Сбрасываем характеристики
+                resetCharacteristics();
+            }
+            
+            // Обновляем интерфейс
+            attemptsElement.textContent = attempts;
+            dayElement.textContent = calculateDayNumber();
+            
+           
+            
+            // Запускаем таймер до следующего дня
+            startCountdown();
+        }
+
+        // Заполнение таблицы преподавателей
+        function populateTeachersTable() {
+            teachersTableBody.innerHTML = '';
+            
+            teachers.forEach(teacher => {
+                const row = document.createElement('tr');
+                
+                // Определяем класс редкости для требовательности
+                let demandingClass = '';
+                if (teacher.demanding === 'Высокая') demandingClass = 'rarity-high';
+                else if (teacher.demanding === 'Средняя') demandingClass = 'rarity-medium';
+                else demandingClass = 'rarity-low';
+                
+                // Определяем класс редкости
+                let rarityClass = teacher.rarity === 'Редкая' ? 'rarity-high' : 'rarity-low';
+                
+                // Определяем статус доступности
+                let availabilityClass = teacher.availability === 'Активен' ? 'status-yes' : 'status-no';
+                
+                row.innerHTML = `
+                    <td><strong>${teacher.name}</strong></td>
+                    <td><span class="version-badge ${teacher.status === 'Профессор' ? 'version-1' : 'version-2'}">${teacher.status}</span></td>
+                    <td><span class="institute-badge">${teacher.institute}</span></td>
+                    <td><span class="${demandingClass}">${teacher.demanding}</span></td>
+                    <td>${teacher.behavior}</td>
+                    <td><span class="${rarityClass}">${teacher.rarity}</span></td>
+                    <td>${teacher.gender}</td>
+                    <td><span class="status-badge ${availabilityClass}">${teacher.availability}</span></td>
+                `;
+                
+                // Добавляем обработчик клика для выбора преподавателя из таблицы
+                row.addEventListener('click', function() {
+                    teacherInput.value = teacher.name;
+                    suggestions.style.display = 'none';
+                });
+                
+                teachersTableBody.appendChild(row);
+            });
+        }
+
+
+        // Остальной код остается без изменений...
+        // [Здесь должен быть остальной JavaScript код]
+
+        // Обновление статистики
+        function updateStats(stats) {
+            streakElement.textContent = stats.streak || 0;
+            const successRate = stats.total > 0 ? Math.round((stats.wins / stats.total) * 100) : 0;
+            successRateElement.textContent = `${successRate}%`;
+            localStorage.setItem('teacherStats', JSON.stringify(stats));
+        }
+
+        // Расчет номера дня
+        function calculateDayNumber() {
+            const startDate = new Date(2023, 0, 1);
+            const today = new Date();
+            const diffTime = today - startDate;
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays + 1;
+        }
+
+        // Таймер до следующего дня
+        function startCountdown() {
+            function updateCountdown() {
+                const now = new Date();
+                const tomorrow = new Date(now);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                tomorrow.setHours(0, 0, 0, 0);
+                
+                const diff = tomorrow - now;
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                countdownElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+            
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        
+
+        function searchTeachers(query) {
+    if (query.length < 1) return [];
+    const lowerQuery = query.toLowerCase().trim();
+    
+    // Правильный поиск по имени преподавателя
+    return teachers.filter(teacher => 
+        teacher.name.toLowerCase().includes(lowerQuery)
+    );
+
+}
+
+       function showSuggestions(matchingTeachers) {
+    suggestions.innerHTML = '';
+    if (matchingTeachers.length === 0) {
+        suggestions.style.display = 'none';
+        return;
+    }
+    
+    matchingTeachers.forEach(teacher => {
+        const div = document.createElement('div');
+        div.className = 'suggestion';
+        
+        const icon = document.createElement('div');
+        icon.className = 'suggestion-icon';
+        icon.style.background = teacher.iconColor;
+        icon.innerHTML = `<i class="fas fa-user-graduate" style="color: white;"></i>`;
+        
+        const content = document.createElement('div');
+        content.className = 'suggestion-content';
+        
+        const name = document.createElement('div');
+        name.className = 'suggestion-name';
+        name.innerHTML = `<strong>${teacher.name}</strong>`;
+        
+        const details = document.createElement('div');
+        details.className = 'suggestion-details';
+        
+        // Все характеристики в одну строку
+        const characteristics = [
+            { icon: 'fa-user-tie', text: teacher.status },
+            { icon: 'fa-tasks', text: teacher.demanding },
+            { icon: 'fa-building', text: teacher.institute },
+            { icon: 'fa-theater-masks', text: teacher.behavior },
+            { icon: 'fa-gem', text: teacher.rarity },
+            { icon: teacher.gender === 'Мужской' ? 'fa-mars' : 'fa-venus', text: teacher.gender }
+        ];
+        
+        // Создаем один контейнер для всех характеристик в строку
+        characteristics.forEach(char => {
+            const detail = document.createElement('span');
+            detail.className = 'suggestion-detail';
+            detail.innerHTML = `<i class="fas ${char.icon}"></i> ${char.text}`;
+            details.appendChild(detail);
+        });
+        
+        content.appendChild(name);
+        content.appendChild(details);
+        div.appendChild(icon);
+        div.appendChild(content);
+        
+        div.addEventListener('click', () => {
+            teacherInput.value = teacher.name;
+            suggestions.style.display = 'none';
+        });
+        
+        suggestions.appendChild(div);
+    });
+    
+    suggestions.style.display = 'block';
+}
+
+        // Выдача подсказки
+        function giveHint() {
+            if (hintsGiven >= 3) {
+                hintElement.textContent = 'Вы использовали все доступные подсказки!';
+                return;
+            }
+            
+            const hints = [
+                { field: 'status', element: charStatus, text: `Статус: ${currentTeacher.status}` },
+                { field: 'demanding', element: charDemanding, text: `Требовательность: ${currentTeacher.demanding}` },
+                { field: 'institute', element: charInstitute, text: `Институт: ${currentTeacher.institute}` },
+                { field: 'behavior', element: charBehavior, text: `Поведение: ${currentTeacher.behavior}` },
+                { field: 'rarity', element: charRarity, text: `Редкость: ${currentTeacher.rarity}` },
+                { field: 'gender', element: charGender, text: `Пол: ${currentTeacher.gender}` }
+            ];
+            
+            const availableHints = hints.filter(hint => 
+                !document.querySelector(`[data-hint="${hint.field}"]`)
+            );
+            
+            if (availableHints.length === 0) {
+                hintElement.textContent = 'Все подсказки уже использованы!';
+                return;
+            }
+            
+            const hintIndex = Math.floor(Math.random() * availableHints.length);
+            const selectedHint = availableHints[hintIndex];
+            
+            hintElement.innerHTML = `<strong>Подсказка ${hintsGiven + 1}/3:</strong> ${selectedHint.text}`;
+            selectedHint.element.textContent = currentTeacher[selectedHint.field];
+            selectedHint.element.classList.add('revealed');
+            hintsGiven++;
+            
+            const hintElementMarker = document.createElement('div');
+            hintElementMarker.setAttribute('data-hint', selectedHint.field);
+            hintElementMarker.style.display = 'none';
+            document.body.appendChild(hintElementMarker);
+        }
+
+        // Показать преподавателя (при проигрыше)
+        function revealTeacher() {
+            
+        }
+
+        // Создать конфетти
+        function createConfetti() {
+            const colors = ['#4361ee', '#3a0ca3', '#4cc9f0', '#f72585', '#7209b7'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+
+        // Проверка предположения
+       // Проверка предположения
+// Проверка предположения
+function makeGuess() {
+    const guess = teacherInput.value.trim();
+    
+    if (!guess) {
+        hintElement.textContent = 'Введите имя преподавателя';
+        teacherInput.focus();
+        return;
+    }
+    
+    const guessedTeacher = teachers.find(t => t.name === guess);
+    
+    if (!guessedTeacher) {
+        hintElement.textContent = 'Преподаватель не найден. Попробуйте другого.';
+        teacherInput.value = '';
+        teacherInput.focus();
+        return;
+    }
+    
+    attempts++;
+    attemptsElement.textContent = attempts;
+    
+    // Создаем контейнер для попытки
+    const attemptContainer = document.createElement('div');
+    attemptContainer.className = 'attempt-container';
+    
+    // Создаем заголовок с аватаром и именем
+    const attemptHeader = document.createElement('div');
+    attemptHeader.className = 'attempt-header';
+    
+    // Создаем аватар с додо
+    const avatar = document.createElement('div');
+    avatar.className = 'attempt-avatar';
+    
+    const img = document.createElement('img');
+    img.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Dodo_1.JPG/240px-Dodo_1.JPG';
+    img.alt = 'Додо';
+    img.onerror = function() {
+        // Если картинка не загрузится, создаем иконку
+        this.style.display = 'none';
+        const icon = document.createElement('i');
+        icon.className = 'fas fa-dove';
+        icon.style.color = 'white';
+        icon.style.fontSize = '1.5rem';
+        avatar.appendChild(icon);
+    };
+    avatar.appendChild(img);
+    
+    // Добавляем имя преподавателя
+    const teacherName = document.createElement('div');
+    teacherName.className = 'attempt-teacher-name';
+    teacherName.textContent = guessedTeacher.name;
+    
+    attemptHeader.appendChild(avatar);
+    attemptHeader.appendChild(teacherName);
+    attemptContainer.appendChild(attemptHeader);
+    
+    // Создаем блок характеристик
+    const characteristicsContainer = document.createElement('div');
+    characteristicsContainer.className = 'attempt-characteristics';
+    
+    const characteristics = [
+        { key: 'status', label: 'Статус', icon: 'fa-user-tie', bgClass: 'char-status' },
+        { key: 'demanding', label: 'Требовательность', icon: 'fa-tasks', bgClass: 'char-demanding' },
+        { key: 'institute', label: 'Институт', icon: 'fa-building', bgClass: 'char-institute' },
+        { key: 'behavior', label: 'Поведение', icon: 'fa-theater-masks', bgClass: 'char-behavior' },
+        { key: 'rarity', label: 'Редкость', icon: 'fa-gem', bgClass: 'char-rarity' },
+        { key: 'gender', label: 'Пол', icon: 'fa-venus-mars', bgClass: 'char-gender' }
+    ];
+    
+    let allCorrect = true;
+    
+    characteristics.forEach(char => {
+        const isCorrect = guessedTeacher[char.key] === currentTeacher[char.key];
+        if (!isCorrect) allCorrect = false;
+        
+        const characteristic = document.createElement('div');
+        characteristic.className = `attempt-characteristic ${char.bgClass} ${isCorrect ? 'correct' : 'incorrect'}`;
+        
+        characteristic.innerHTML = `
+            <div class="char-hint top"><i class="fas fa-arrow-up"></i></div>
+            <div class="char-hint bottom"><i class="fas fa-graduation-cap"></i></div>
+            <div class="char-icon">
+                <i class="fas ${char.icon}"></i>
+            </div>
+            <div class="char-label">${char.label}</div>
+            <div class="char-value">${guessedTeacher[char.key]}</div>
+        `;
+        
+        characteristicsContainer.appendChild(characteristic);
+    });
+    
+    attemptContainer.appendChild(characteristicsContainer);
+    
+    // Добавляем рамку к аватару в зависимости от результата
+    if (allCorrect) {
+        avatar.classList.add('correct');
+    } else {
+        avatar.classList.add('incorrect');
+    }
+    
+    resultsContainer.appendChild(attemptContainer);
+    resultsContainer.scrollTop = resultsContainer.scrollHeight;
+    
+    // Остальной код проверки победы/проигрыша
+    if (allCorrect) {
+    gameWon = true;
+    hintElement.innerHTML = '<strong>Поздравляем!</strong> Вы угадали преподавателя!';
+    guessBtn.disabled = true;
+    teacherInput.disabled = true;
+    // Убираем вызов revealTeacher() так как характеристик в основном интерфейсе нет
+    createConfetti()
+        
+        const stats = JSON.parse(localStorage.getItem('teacherStats') || '{"wins":0,"total":0,"streak":0,"maxStreak":0}');
+        stats.wins++;
+        stats.total++;
+        stats.streak++;
+        if (stats.streak > stats.maxStreak) stats.maxStreak = stats.streak;
+        updateStats(stats);
+    } else if (attempts >= maxAttempts) {
+        hintElement.textContent = `Игра окончена. Сегодняшний преподаватель: ${currentTeacher.name}. Возвращайтесь завтра!`;
+        guessBtn.disabled = true;
+        teacherInput.disabled = true;
+       
+        
+        const stats = JSON.parse(localStorage.getItem('teacherStats') || '{"wins":0,"total":0,"streak":0,"maxStreak":0}');
+        stats.total++;
+        stats.streak = 0;
+        updateStats(stats);
+    } else {
+        hintElement.textContent = 'Попробуйте еще раз!';
+    }
+    
+    teacherInput.value = '';
+    suggestions.style.display = 'none';
+    teacherInput.focus();
+    
+    localStorage.setItem('teacherAttempts', attempts);
+    localStorage.setItem('teacherResults', resultsContainer.innerHTML);
+}
+
+        // Обработчики событий
+        teacherInput.addEventListener('input', function() {
+            const query = this.value;
+            const matchingTeachers = searchTeachers(query);
+            showSuggestions(matchingTeachers);
+        });
+
+        teacherInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                makeGuess();
+            }
+        });
+
+        teacherInput.addEventListener('focus', function() {
+            const query = this.value;
+            if (query.length >= 2) {
+                const matchingTeachers = searchTeachers(query);
+                showSuggestions(matchingTeachers);
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.input-container')) {
+                suggestions.style.display = 'none';
+            }
+        });
+
+        guessBtn.addEventListener('click', makeGuess);
+        
+
+        // Запуск игры при загрузке страницы
+        window.addEventListener('DOMContentLoaded', initGame);
+
+        // === ПАНЕЛЬ РАЗРАБОТЧИКА ДЛЯ ТЕСТИРОВАНИЯ ===
+        function initDevPanel() {
+            const devButton = document.createElement('button');
+            devButton.innerHTML = '🧪';
+            devButton.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: var(--primary);
+                color: white;
+                border: none;
+                font-size: 20px;
+                cursor: pointer;
+                z-index: 10000;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            `;
+            document.body.appendChild(devButton);
+            
+            const devPanel = document.createElement('div');
+            devPanel.id = 'devPanel';
+            devPanel.style.cssText = `
+                position: fixed;
+                bottom: 80px;
+                right: 20px;
+                background: white;
+                padding: 20px;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                z-index: 9999;
+                display: none;
+                min-width: 300px;
+                border: 2px solid var(--primary);
+            `;
+            
+            devPanel.innerHTML = `
+                <h3 style="margin-bottom: 15px; color: var(--primary);">🧪 Панель тестирования</h3>
+                
+                <div style="margin-bottom: 15px;">
+                    <strong>Текущий:</strong> <span id="devCurrentTeacher">${currentTeacher?.name || 'Не выбран'}</span>
+                </div>
+                
+                <button onclick="devRevealTeacher()" style="width: 100%; margin-bottom: 10px; padding: 10px;">
+                    👁️ Показать загаданного
+                </button>
+                
+                <div style="margin-bottom: 10px;">
+                    <label>Сменить преподавателя:</label>
+                    <select id="devTeacherSelect" style="width: 100%; padding: 8px; margin-top: 5px;">
+                        ${teachers.map((t, i) => `<option value="${i}">${t.name}</option>`).join('')}
+                    </select>
+                </div>
+                
+                <button onclick="devChangeTeacher()" style="width: 100%; margin-bottom: 10px; padding: 10px;">
+                    🔄 Сменить
+                </button>
+                
+                <button onclick="devResetGame()" style="width: 100%; margin-bottom: 10px; padding: 10px; background: #e74c3c;">
+                    🗑️ Сбросить игру
+                </button>
+                
+                <button onclick="devClosePanel()" style="width: 100%; padding: 10px; background: var(--gray);">
+                    ❌ Закрыть
+                </button>
+                
+                <div style="margin-top: 15px; font-size: 12px; color: var(--gray);">
+                    Попытки: <span id="devAttempts">${attempts}</span> | День: <span id="devDay">${calculateDayNumber()}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(devPanel);
+            
+            devButton.addEventListener('click', function() {
+                devPanel.style.display = devPanel.style.display === 'none' ? 'block' : 'none';
+                updateDevPanel();
+            });
+        }
+
+        // Функции для панели разработчика
+        function devRevealTeacher() {
+            if (currentTeacher) {
+                alert(`🎯 Загаданный преподаватель: ${currentTeacher.name}\n\nХарактеристики:\n• Статус: ${currentTeacher.status}\n• Требовательность: ${currentTeacher.demanding}\n• Институт: ${currentTeacher.institute}\n• Поведение: ${currentTeacher.behavior}\n• Редкость: ${currentTeacher.rarity}\n• Пол: ${currentTeacher.gender}`);
+            }
+        }
+
+        function devChangeTeacher() {
+            const select = document.getElementById('devTeacherSelect');
+            const index = parseInt(select.value);
+            
+            if (index >= 0 && index < teachers.length) {
+                currentTeacher = teachers[index];
+                localStorage.setItem('teacherIndex', index);
+                localStorage.setItem('teacherGameDate', new Date().toDateString());
+                localStorage.setItem('teacherAttempts', '0');
+                localStorage.setItem('teacherResults', '');
+                
+                attempts = 0;
+                attemptsElement.textContent = attempts;
+                resultsContainer.innerHTML = '';
+                resetCharacteristics();
+                guessBtn.disabled = false;
+                teacherInput.disabled = false;
+                hintElement.textContent = 'Преподаватель изменен! Можно начинать заново.';
+                
+                updateDevPanel();
+                alert(`✅ Преподаватель изменен на: ${currentTeacher.name}`);
+            }
+        }
+
+        function devResetGame() {
+            if (confirm('⚠️ Вы уверены, что хотите полностью сбросить игру?')) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        function devClosePanel() {
+            document.getElementById('devPanel').style.display = 'none';
+        }
+
+        function updateDevPanel() {
+            document.getElementById('devCurrentTeacher').textContent = currentTeacher?.name || 'Не выбран';
+            document.getElementById('devAttempts').textContent = attempts;
+            document.getElementById('devDay').textContent = calculateDayNumber();
+        }
+
+        // Инициализируем панель разработчика после загрузки игры
+        setTimeout(initDevPanel, 1000);
+    </script>
+</body>
+</html>
