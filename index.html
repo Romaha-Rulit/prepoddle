@@ -12,412 +12,414 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
-        :root {
-            --primary: #4361ee;
-            --secondary: #3a0ca3;
-            --success: #4cc9f0;
-            --warning: #f72585;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --card-bg: #ffffff;
-            --shadow: 0 10px 30px rgba(0,0,0,0.1);
-            --gradient: linear-gradient(135deg, #4361ee, #3a0ca3);
-            --status-bg: #e3f2fd;
-            --demanding-bg: #fff3e0;
-            --institute-bg: #e8f5e8;
-            --behavior-bg: #f3e5f5;
-            --rarity-bg: #fff8e1;
-            --gender-bg: #fce4ec;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: var(--dark);
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1500px;
-            margin: 0 auto;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            border-radius: 20px;
-            background: var(--gradient);
-            color: white;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            transform: rotate(30deg);
-        }
-        
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            font-weight: 800;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            position: relative;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .game-stats {
-            display: flex;
-            justify-content: space-between;
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
-        }
-        
-        .stat-card {
-            text-align: center;
-            flex: 1;
-            padding: 15px;
-        }
-        
-        .stat-card:not(:last-child) {
-            border-right: 1px solid #eee;
-        }
-        
-        .stat-value {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        /* ВЕРТИКАЛЬНОЕ РАСПОЛОЖЕНИЕ БЛОКОВ */
-        .game-sections {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        
-        .game-section {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: var(--shadow);
-        }
-        
-        .input-container {
-            position: relative;
-            margin-bottom: 20px;
-        }
-        
-        input {
-            width: 100%;
-            padding: 18px 20px;
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            background: #f8f9fa;
-        }
-        
-        input:focus {
-            border-color: var(--primary);
-            background: white;
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-            outline: none;
-        }
-        
-        .suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-height: 300px;
-            overflow-y: auto;
-            z-index: 10;
-            display: none;
-            border: 1px solid #e9ecef;
-        }
-        
-        .suggestion {
-            padding: 15px 20px;
-            cursor: pointer;
-            border-bottom: 1px solid #f1f3f4;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-        }
-        
-        .suggestion:hover {
-            background: #f8f9fa;
-            transform: translateX(5px);
-        }
-        
-        .suggestion:last-child {
-            border-bottom: none;
-        }
-        
-        .suggestion-content {
-            flex: 1;
-        }
-        
-        .suggestion-name {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .suggestion-details {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            font-size: 0.85rem;
-            color: var(--gray);
-        }
-        
-        .suggestion-detail {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        .suggestion-detail i {
-            width: 16px;
-            text-align: center;
-            font-size: 0.8rem;
-        }
-        
-        .suggestion-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            flex-shrink: 0;
-            font-size: 1.2rem;
-        }
-        
-        .controls {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        button {
-            padding: 16px 30px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            flex: 1;
-        }
-        
-        #guess-btn {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
-        }
-        
-        #guess-btn:hover {
-            background: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
-        }
-        
-        #hint-btn {
-            background: #f8f9fa;
-            color: var(--dark);
-            border: 2px solid #e9ecef;
-        }
-        
-        #hint-btn:hover {
-            background: #e9ecef;
-            transform: translateY(-2px);
-        }
-        
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .section-title i {
-            color: var(--primary);
-        }
-        
-        .results-container {
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
-        
-        .result-row {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
-            gap: 10px;
-            padding: 15px;
-            margin-bottom: 12px;
-            border-radius: 12px;
-            background: #f8f9fa;
-            transition: all 0.3s;
-            animation: fadeIn 0.5s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .result-row:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        
-        .result-header {
-            background: var(--gradient);
-            color: white;
-            font-weight: 600;
-            position: sticky;
-            top: 0;
-            z-index: 5;
-        }
-        
-        .result-cell {
-            display: flex;
-            align-items: center;
-            padding: 5px;
-            gap: 8px;
-        }
-        
-        .result-cell-icon {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            flex-shrink: 0;
-        }
-        
-        .status-icon { background: #2196f3; color: white; }
-        .demanding-icon { background: #ff9800; color: white; }
-        .institute-icon { background: #4caf50; color: white; }
-        .behavior-icon { background: #9c27b0; color: white; }
-        .rarity-icon { background: #ffc107; color: white; }
-        .gender-icon { background: #e91e63; color: white; }
-        
-        .correct {
-            background: rgba(76, 201, 240, 0.15);
-            border-left: 4px solid var(--success);
-        }
-        
-        .incorrect {
-            background: rgba(247, 37, 133, 0.08);
-            border-left: 4px solid var(--warning);
-        }
-        
-        .hint-section {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .hint-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-        
-        .hint-text {
-            flex: 1;
-        }
-        
-        .countdown-section {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: var(--shadow);
-        }
-        
-        .countdown-title {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            color: var(--gray);
-        }
-        
-        .countdown-timer {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-            font-family: 'Courier New', monospace;
-        }
-        /* СТИЛИ ДЛЯ ИСТОРИИ ПОПЫТОК С ХАРАКТЕРИСТИКАМИ */
-.attempt-container {
+        /* Стили для модального окна победы */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease;
+    overflow: hidden;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 25px 30px;
+    position: relative;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.close-modal:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.win-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     margin-bottom: 25px;
+}
+
+.win-stat {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+}
+
+.win-stat-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.win-stat-info {
+    flex: 1;
+}
+
+.win-stat-label {
+    font-size: 0.85rem;
+    color: var(--gray);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.win-stat-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.win-message {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+    border-radius: 12px;
+    font-size: 1.1rem;
+    color: var(--primary);
+    font-weight: 600;
+    border: 2px dashed var(--primary);
+}
+
+.modal-footer {
+    padding: 20px 30px;
+    background: #f8f9fa;
+    text-align: center;
+    border-top: 1px solid #e0e0e0;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(44, 85, 48, 0.3);
+}
+
+/* Конфетти поверх модального окна */
+.confetti {
+    z-index: 10001;
+}
+        
+       :root {
+    --primary: #2c5530;
+    --secondary: #4a7c59;
+    --success: #38b000;
+    --warning: #e63946;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --gray: #6c757d;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    --gradient: linear-gradient(135deg, #2c5530, #4a7c59);
+    --status-bg: #e8f5e8;
+    --demanding-bg: #fff3e0;
+    --institute-bg: #e3f2fd;
+    --behavior-bg: #f3e5f5;
+    --rarity-bg: #fff8e1;
+    --gender-bg: #fce4ec;
+}
+
+body {
+    background: linear-gradient(135deg, #f1f8e9 0%, #e8f5e8 100%);
+    color: var(--dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 25px;
+    border-radius: 15px;
+    background: var(--gradient);
+    color: white;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #1b4332;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    transform: rotate(30deg);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    position: relative;
+    font-family: 'Georgia', serif;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    font-style: italic;
+}
+
+.game-stats {
+    display: flex;
+    justify-content: space-between;
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    border: 1px solid #e0e0e0;
+}
+
+.stat-card {
+    text-align: center;
+    flex: 1;
+    padding: 15px;
+    border-right: 1px solid #f0f0f0;
+}
+
+.stat-card:last-child {
+    border-right: none;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 5px;
+    font-family: 'Courier New', monospace;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.game-section {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    border: 1px solid #e8e8e8;
+    transition: transform 0.3s ease;
+}
+
+.game-section:hover {
+    transform: translateY(-2px);
+}
+
+.section-title {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    border-bottom: 2px solid #e8f5e8;
+    padding-bottom: 10px;
+}
+
+.section-title i {
+    color: var(--primary);
+}
+
+input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background: #fafafa;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+input:focus {
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(44, 85, 48, 0.1);
+    outline: none;
+}
+
+button {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex: 1;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+#guess-btn {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(44, 85, 48, 0.3);
+}
+
+#guess-btn:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(44, 85, 48, 0.4);
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 10;
+    display: none;
+    border: 1px solid #e0e0e0;
+}
+
+.suggestion {
+    padding: 12px 18px;
+    cursor: pointer;
+    border-bottom: 1px solid #f5f5f5;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.suggestion:hover {
+    background: #f8f9fa;
+    transform: translateX(3px);
+}
+
+.suggestion-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+    background: var(--primary);
+    color: white;
+}
+
+/* Стили для истории попыток */
+.attempt-container {
+    margin-bottom: 20px;
     padding: 20px;
     background: var(--card-bg);
-    border-radius: 16px;
+    border-radius: 12px;
     box-shadow: var(--shadow);
     animation: fadeIn 0.5s ease-out;
+    border: 1px solid #e8e8e8;
+    transition: transform 0.3s ease;
+}
+
+.attempt-container:hover {
+    transform: translateY(-1px);
 }
 
 .attempt-header {
@@ -426,12 +428,12 @@
     gap: 15px;
     margin-bottom: 15px;
     padding-bottom: 15px;
-    border-bottom: 2px solid #f1f3f4;
+    border-bottom: 2px solid #f0f0f0;
 }
 
 .attempt-avatar {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     background: var(--gradient);
     display: flex;
@@ -440,6 +442,7 @@
     flex-shrink: 0;
     overflow: hidden;
     border: 3px solid transparent;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .attempt-avatar.correct {
@@ -457,47 +460,159 @@
 }
 
 .attempt-teacher-name {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--dark);
+    font-family: 'Georgia', serif;
 }
 
 .attempt-characteristics {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
     margin-top: 0;
 }
 
 .attempt-characteristic {
     background: var(--card-bg);
-    border-radius: 16px;
-    padding: 20px;
+    border-radius: 12px;
+    padding: 18px;
     text-align: center;
-    transition: all 0.4s;
+    transition: all 0.3s;
     position: relative;
     overflow: hidden;
     border: 2px solid transparent;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .attempt-characteristic.correct {
     border-left: 4px solid var(--success);
-    background: rgba(76, 201, 240, 0.15);
+    background: rgba(56, 176, 0, 0.08);
 }
 
 .attempt-characteristic.incorrect {
     border-left: 4px solid var(--warning);
-    background: rgba(247, 37, 133, 0.08);
+    background: rgba(230, 57, 70, 0.08);
 }
 
 .attempt-characteristic:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* Адаптивность для истории */
+.char-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 2;
+    background: var(--primary);
+    color: white;
+}
+
+.char-label {
+    font-size: 0.8rem;
+    color: var(--gray);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+
+.char-value {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 5px 0;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark);
+}
+
+/* Индивидуальные стили для характеристик */
+.char-status .char-icon { background: #2c5530; }
+.char-demanding .char-icon { background: #e63946; }
+.char-institute .char-icon { background: #1e6091; }
+.char-behavior .char-icon { background: #9d4edd; }
+.char-rarity .char-icon { background: #f48c06; }
+.char-gender .char-icon { background: #e63946; }
+
+.hint-section {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid #e8e8e8;
+    background: #f8f9fa;
+}
+
+.hint-icon {
+    width: 45px;
+    height: 45px;
+    background: var(--gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.countdown-section {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border: 1px solid #e8e8e8;
+}
+
+.countdown-title {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: var(--gray);
+    font-weight: 600;
+}
+
+.countdown-timer {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    font-family: 'Courier New', monospace;
+}
+
+/* Адаптивность */
 @media (max-width: 768px) {
+    .game-stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .stat-card {
+        border-right: none;
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 15px;
+    }
+    
+    .stat-card:last-child {
+        border-bottom: none;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
     .attempt-characteristics {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -508,488 +623,85 @@
         gap: 10px;
     }
     
-    .attempt-teacher-name {
-        font-size: 1.1rem;
+    .controls {
+        flex-direction: column;
+    }
+    
+    .section-title {
+        font-size: 1.2rem;
     }
 }
-        
-        /* ОБНОВЛЕННЫЕ СТИЛИ ДЛЯ ХАРАКТЕРИСТИК */
-        .characteristics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .characteristic {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-        
-        .characteristic:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-        }
-        
-        .char-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 12px;
-            font-size: 1.8rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .char-hint {
-            position: absolute;
-            font-size: 2.5rem;
-            opacity: 0.08;
-            z-index: 1;
-            transition: all 0.3s;
-        }
-        
-        .char-hint.top {
-            top: 5px;
-            right: 10px;
-        }
-        
-        .char-hint.bottom {
-            bottom: 5px;
-            left: 10px;
-        }
-        
-        .characteristic:hover .char-hint {
-            opacity: 0.15;
-            transform: scale(1.1);
-        }
-        
-        .char-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin: 8px 0 4px;
-            min-height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .char-label {
-            font-size: 0.85rem;
-            color: var(--gray);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        /* Индивидуальные стили для каждой характеристики */
-        .char-status {
-            background: var(--status-bg);
-            border-color: #2196f3;
-        }
-        
-        .char-status .char-icon {
-            background: linear-gradient(135deg, #2196f3, #1976d2);
-            color: white;
-        }
-        
-        .char-demanding {
-            background: var(--demanding-bg);
-            border-color: #ff9800;
-        }
-        
-        .char-demanding .char-icon {
-            background: linear-gradient(135deg, #ff9800, #f57c00);
-            color: white;
-        }
-        
-        .char-institute {
-            background: var(--institute-bg);
-            border-color: #4caf50;
-        }
-        
-        .char-institute .char-icon {
-            background: linear-gradient(135deg, #4caf50, #388e3c);
-            color: white;
-        }
-        
-        .char-behavior {
-            background: var(--behavior-bg);
-            border-color: #9c27b0;
-        }
-        
-        .char-behavior .char-icon {
-            background: linear-gradient(135deg, #9c27b0, #7b1fa2);
-            color: white;
-        }
-        
-        .char-rarity {
-            background: var(--rarity-bg);
-            border-color: #ffc107;
-        }
-        
-        .char-rarity .char-icon {
-            background: linear-gradient(135deg, #ffc107, #ffa000);
-            color: white;
-        }
-        
-        .char-gender {
-            background: var(--gender-bg);
-            border-color: #e91e63;
-        }
-        
-        .char-gender .char-icon {
-            background: linear-gradient(135deg, #e91e63, #c2185b);
-            color: white;
-        }
-        
-        /* Анимация появления значения */
-        @keyframes valueReveal {
-            0% { transform: scale(0.8); opacity: 0; }
-            70% { transform: scale(1.1); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        
-        .char-value.revealed {
-            animation: valueReveal 0.6s ease-out;
-            color: var(--primary);
-        }
-        
-        /* СТИЛИ ДЛЯ ТАБЛИЦЫ ПРЕПОДАВАТЕЛЕЙ */
-        .teachers-table-section {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
-        }
-        
-        .table-container {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .table-header {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-            color: white;
-            padding: 20px;
-        }
-        
-        .table-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .table-subtitle {
-            color: #bdc3c7;
-            font-size: 0.9rem;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-        }
-        
-        thead {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-        }
-        
-        th {
-            padding: 15px 12px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border-right: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        th:last-child {
-            border-right: none;
-        }
-        
-        tbody tr {
-            border-bottom: 1px solid #ecf0f1;
-            transition: all 0.3s ease;
-        }
-        
-        tbody tr:hover {
-            background: #f8f9fa;
-        }
-        
-        td {
-            padding: 12px 12px;
-            font-size: 0.85rem;
-            border-right: 1px solid #ecf0f1;
-        }
-        
-        td:last-child {
-            border-right: none;
-        }
-        
-        .version-badge {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-align: center;
-            min-width: 70px;
-        }
-        
-        .version-1 { background: #e74c3c; color: white; }
-        .version-2 { background: #e67e22; color: white; }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-align: center;
-        }
-        
-        .status-yes { 
-            background: rgba(46, 204, 113, 0.15); 
-            color: #27ae60; 
-            border: 1px solid #2ecc71;
-        }
-        
-        .status-no { 
-            background: rgba(231, 76, 60, 0.15); 
-            color: #c0392b; 
-            border: 1px solid #e74c3c;
-        }
-        
-        .rarity-high {
-            color: #e74c3c;
-            font-weight: 700;
-        }
-        
-        .rarity-medium {
-            color: #e67e22;
-            font-weight: 600;
-        }
-        
-        .rarity-low {
-            color: #27ae60;
-            font-weight: 600;
-        }
-        
-        .institute-badge {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            background: #3498db;
-            color: white;
-        }
-        
-        .table-search {
-            width: 100%;
-            padding: 12px 15px;
-            margin-bottom: 15px;
-            border: 2px solid #3498db;
-            border-radius: 8px;
-            font-size: 1rem;
-            background: white;
-        }
-        
-        @media (max-width: 768px) {
-            .game-stats {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .stat-card:not(:last-child) {
-                border-right: none;
-                border-bottom: 1px solid #eee;
-                padding-bottom: 20px;
-            }
-            
-            .result-row {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-            
-            .result-header {
-                display: none;
-            }
-            
-            .result-cell {
-                display: flex;
-                justify-content: space-between;
-                padding: 8px 0;
-                border-bottom: 1px solid #eee;
-            }
-            
-            .result-cell:last-child {
-                border-bottom: none;
-            }
-            
-            .result-cell::before {
-                content: attr(data-label);
-                font-weight: 600;
-                color: var(--gray);
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .characteristics {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .suggestion-details {
-                grid-template-columns: 1fr;
-            }
-            
-            .table-container {
-                overflow-x: auto;
-            }
-            
-            table {
-                min-width: 800px;
-            }
-            
-            .controls {
-                flex-direction: column;
-            }
-        }
-        .suggestion {
-    padding: 15px 20px;
-    cursor: pointer;
-    border-bottom: 1px solid #f1f3f4;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    min-height: 60px;
+
+/* Анимации */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.suggestion-content {
+/* Кастомный скроллбар */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
+.input-with-button {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 0;
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 6px;
-    width: 100%;
 }
 
-.suggestion-name {
+#guess-btn {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(44, 85, 48, 0.3);
+    padding: 16px 30px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
     font-weight: 600;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-}
-
-.suggestion-details {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 10px;
-    width: 100%;
-    align-items: center;
-}
-
-.suggestion-detail {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.8rem;
-    color: var(--gray);
+    transition: all 0.3s;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    justify-content: flex-start;
+    min-width: 120px;
+    height: 56px; /* Высота соответствует полю ввода */
 }
 
-.suggestion-detail i {
-    width: 16px;
-    text-align: center;
-    font-size: 0.8rem;
-    opacity: 0.8;
-    flex-shrink: 0;
-}
-
-.suggestion-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
-    flex-shrink: 0;
-    font-size: 1.2rem;
+#guess-btn:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(44, 85, 48, 0.4);
 }
 
 /* Адаптивность для мобильных */
 @media (max-width: 768px) {
-    .suggestion-details {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
+    .input-with-button {
+        flex-direction: column;
+        gap: 12px;
     }
     
-    .suggestion-detail {
-        font-size: 0.75rem;
-        gap: 4px;
-    }
-    
-    .suggestion-detail i {
-        font-size: 0.7rem;
-        width: 14px;
-    }
-    
-    .suggestion {
-        padding: 12px 15px;
-        min-height: 50px;
+    #guess-btn {
+        width: 100%;
+        height: 50px;
     }
 }
-        
-        /* Анимации */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        /* Кастомный скроллбар */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary);
-        }
         
         /* Эффект победы */
         .confetti {
@@ -1015,6 +727,7 @@
     </style>
 </head>
 <body>
+    
     <div class="container">
         <header>
             <h1><i class="fas fa-chalkboard-teacher"></i> ПреподГейм</h1>
@@ -1043,24 +756,20 @@
         <!-- ВЕРТИКАЛЬНОЕ РАСПОЛОЖЕНИЕ ВСЕХ БЛОКОВ -->
         <div class="game-sections">
             <!-- БЛОК УГАДЫВАНИЯ -->
-            <div class="game-section">
-                <h2 class="section-title"><i class="fas fa-search"></i> Кто сегодняшний преподаватель?</h2>
-                
-                <div class="input-container">
-                    <input type="text" id="teacher-input" placeholder="Начните вводить имя преподавателя...">
-                    <div class="suggestions" id="suggestions"></div>
-                </div>
-                
-                <div class="controls">
-                    <button id="guess-btn">
-                        <i class="fas fa-paper-plane"></i> Проверить
-                    </button>
-                    
-                </div>
-                
-                <!-- ХАРАКТЕРИСТИКИ -->
-                
-            </div>
+<div class="game-section">
+    <h2 class="section-title"><i class="fas fa-search"></i> Кто сегодняшний преподаватель?</h2>
+    
+    <div class="input-with-button">
+        <div class="input-container">
+            <input type="text" id="teacher-input" placeholder="Начните вводить имя преподавателя...">
+            <div class="suggestions" id="suggestions"></div>
+        </div>
+        
+        <button id="guess-btn">
+            Проверить
+        </button>
+    </div>
+</div>
             
             <!-- БЛОК ИСТОРИИ ПОПЫТОК -->
             <div class="game-section">
@@ -1090,99 +799,3151 @@
             <div class="countdown-timer" id="countdown">23:59:42</div>
         </div>
     </div>
-
+<!-- Модальное окно победы -->
+<div id="win-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-trophy"></i> Поздравляем!</h2>
+            <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="win-stats">
+                <div class="win-stat">
+                    <div class="win-stat-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="win-stat-info">
+                        <div class="win-stat-label">Загаданный преподаватель</div>
+                        <div class="win-stat-value" id="win-teacher-name"></div>
+                    </div>
+                </div>
+                
+                <div class="win-stat">
+                    <div class="win-stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="win-stat-info">
+                        <div class="win-stat-label">Потрачено попыток</div>
+                        <div class="win-stat-value" id="win-attempts-count"></div>
+                    </div>
+                </div>
+                
+                <div class="win-stat">
+                    <div class="win-stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="win-stat-info">
+                        <div class="win-stat-label">Угадали этого преподавателя</div>
+                        <div class="win-stat-value" id="win-guess-count">0 человек</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="win-message">
+                Отличная работа! Возвращайтесь завтра для новой загадки!
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="close-win-modal" class="btn-primary">Понятно</button>
+        </div>
+    </div>
+</div>
     <script>
         // ОБНОВЛЕННАЯ БАЗА ДАННЫХ С РЕДКОСТЬЮ
         const teachers = [
-            {
-                name: "Иванов А.А.",
-                status: "Профессор",
-                demanding: "Высокая",
-                institute: "ИСИ",
-                behavior: "Особое",
-                rarity: "Редкая",
-                gender: "Мужской",
-                availability: "Активен",
-                iconColor: "#2196f3"
-            },
-            {
-                name: "Петрова Е.В.",
-                status: "Доцент",
-                demanding: "Средняя",
-                institute: "ИМЕиКН",
-                behavior: "Нейтральное",
-                rarity: "Обычная",
-                gender: "Женский",
-                availability: "Активен",
-                iconColor: "#e91e63"
-            },
-            {
-                name: "Сидоров П.С.",
-                status: "Профессор",
-                demanding: "Низкая",
-                institute: "ИСИ",
-                behavior: "Особое",
-                rarity: "Редкая",
-                gender: "Мужской",
-                availability: "Активен",
-                iconColor: "#2196f3"
-            },
-            {
-                name: "Козлова М.И.",
-                status: "Доцент",
-                demanding: "Высокая",
-                institute: "ИМЕиКН",
-                behavior: "Нейтральное",
-                rarity: "Обычная",
-                gender: "Женский",
-                availability: "В отпуске",
-                iconColor: "#e91e63"
-            },
-            {
-                name: "Николаев В.Г.",
-                status: "Профессор",
-                demanding: "Средняя",
-                institute: "ИСИ",
-                behavior: "Особое",
-                rarity: "Редкая",
-                gender: "Мужской",
-                availability: "Активен",
-                iconColor: "#2196f3"
-            },
-            {
-                name: "Смирнова О.П.",
-                status: "Доцент",
-                demanding: "Низкая",
-                institute: "ИМЕиКН",
-                behavior: "Нейтральное",
-                rarity: "Обычная",
-                gender: "Женский",
-                availability: "Активен",
-                iconColor: "#e91e63"
-            },
-            {
-                name: "Федоров Д.С.",
-                status: "Профессор",
-                demanding: "Высокая",
-                institute: "ИСИ",
-                behavior: "Нейтральное",
-                rarity: "Редкая",
-                gender: "Мужской",
-                availability: "Командировка",
-                iconColor: "#2196f3"
-            },
-            {
-                name: "Васнецова А.К.",
-                status: "Доцент",
-                demanding: "Средняя",
-                institute: "ИМЕиКН",
-                behavior: "Особое",
-                rarity: "Обычная",
-                gender: "Женский",
-                availability: "Активен",
-                iconColor: "#e91e63"
-            }
-        ];
+    {
+        name: "Авдонина Л.Г.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Авдюнин В.А.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Аксютина С.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Амахина С.Р.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Андреев А.Н.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Андреева Е.А.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Андреева Е.П.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Андреева Н.Н.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Андрианов И.А.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Андронович С.А.",
+        status: "Заведующий кафедрой",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Аникина Т.И.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Анисимов Н.В.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Антонова Д.С.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Арашин С.Ю.",
+        status: "Ассистент",
+        demanding: "Низкая",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Атаева Н.Ю.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Багулина Т.Н.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Баженова О.В.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Базанов С.С.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Бакаев В.Н.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Баранов С.Ю.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Баранова Н.В.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Безнин М.А.",
+        status: "Заведующий кафедрой",
+        demanding: "Высокая",
+        institute: "ИПиП",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Белова Е.Л.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Белова Ю.Н.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Белый А.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИСиГН",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Беляев А.В.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Белянина А.Ю.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИМЕиТ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Берсенева Л.А.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Блинова Л.Н.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Блинова С.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Богданов Д.А.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Богданова С.Н.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Богомолов А.А.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Богуцкий А.Л.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Болотова Н.Л.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Борисов А.А.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Бормосов Н.А.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Будилова М.П.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Будилова Т.А.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИСиГН",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Булавин В.Ф.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Булавина Т.Г.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИМЕиТ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Бурсина О.А.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Бутакова М.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИПиП",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Бушманова О.И.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Вадурина Е.Н.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Василенко С.С.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Васильев Н.Н.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Лазарева А.С.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Васильевская Т.С.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Вахрамеева Н.С.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Вельсовский А.Ю.",
+        status: "Заведующий кафедрой",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Верещагина О.В.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Верхорубов В.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИСиГН",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Вешторт С.В.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Вирячева Т.К.",
+        status: "Старший преподаватель",
+        demanding: "Высокая",
+        institute: "ИМЕиТ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Вискова Т.А.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Вихарева Н.Н.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Вишнякова Т.Б.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Водовозов А.М.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Волкова К.В.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Волкова С.С.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Волкодав И.А.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Володина Л.О.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Вонтова Н.Е.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Воробьёва Я.А.",
+        status: "Педагог дополнительного образования",
+        demanding: "Низкая",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Воронина Т.Н.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Воропай Л.М.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Востров А.В.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Вяткина О.С.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИМЕиТ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Габибов Н.Н.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Ганичева Е.М.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИПиП",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Ганичева С.А.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Главчук С.А.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Глебова Д.В.",
+        status: "Педагог дополнительного образования",
+        demanding: "Низкая",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Глинкина Н.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Гоголева О.В.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Голиков Н.А.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Головкина С.Х.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Голубев А.К.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Голубев О.Б.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Горбунов В.А.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИСиГН",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Горохова Ю.А.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Гороховская И.В.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИМЕиТ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Григорьев Н.С.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Громов Е.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИПиП",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Громыко С.А.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Губа В.С.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Губанова Е.С.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИСиГН",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Гудков А.Г.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Гудкова Л.А.",
+        status: "Педагог дополнительного образования",
+        demanding: "Низкая",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Гузакова О.Л.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Гулин К.А.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИПиП",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Тихомирова Е.Н.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Дегтярев М.Е.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Дементьев Н.М.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Демидова О.В.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Корюкина Д.С.",
+        status: "Ассистент",
+        demanding: "Низкая",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Дианов Д.С.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Дианов С.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИПиП",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Димони К.О.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Димони Т.М.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Долгушина М.Г.",
+        status: "Заведующий кафедрой",
+        demanding: "Высокая",
+        institute: "ИСиГН",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Донец С.П.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Драчева Ю.Н.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИМЕиТ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Дрянных Н.В.",
+        status: "Заведующий кафедрой",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Дубинина С.Н.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Дунаев А.И.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Дунаев Н.С.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Дымов Н.Э.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Егорова Л.В.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Егорова Н.Н.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Ейкина Е.М.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Ермакова Д.А.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Жуков А.А.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Жукова В.С.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Журавлева А.О.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Заварин Д.А.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Загоскина Т.В.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Загребельный А.В.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Заступова О.Н.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Зейслер Н.А.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Зейфман А.И.",
+        status: "Заведующий кафедрой",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Золотова О.А.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Зорина Л.Ю.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Иванищева Е.А.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Иванов А.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Иванова А.В.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Иванова Е.Н.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Иванова М.А.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Иванова О.В.",
+        status: "Преподаватель",
+        demanding: "Низкая",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Изюмова Л.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Ильин А.П.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Ильина Е.Н.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Ильина О.В.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Иньков А.Э.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Инькова Ю.А.",
+        status: "Ассистент",
+        demanding: "Низкая",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Исмаилова Р.А.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Истоминская Е.В.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кабанов Е.А.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Казакова И.С.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Калиничева О.В.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Камракова Н.Ю.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Капина О.Н.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Капустина Н.Н.",
+        status: "Преподаватель",
+        demanding: "Низкая",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Карамышева Т.Н.",
+        status: "Педагог дополнительного образования",
+        demanding: "Низкая",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кармазина Е.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИМЕиТ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кароннова С.А.",
+        status: "Заведующий кафедрой",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Карпов Д.Ф.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Катканова И.Н.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Качалова А.Н.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кашенков А.Р.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Кашин А.И.",
+        status: "Старший преподаватель",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Квашнин В.А.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИМЕиТ",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Кибардина С.М.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кириллова Т.Э.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кирилова Е.А.",
+        status: "Преподаватель",
+        demanding: "Низкая",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Киселева Д.А.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кичигина Г.А.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кладовщиков В.А.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Коваленко Н.П.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Ковырзина Т.Ф.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Козырева А.В.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИПиП",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кокина И.А.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Коковина Л.Н.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кокошников И.В.",
+        status: "Преподаватель",
+        demanding: "Низкая",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Колесова Н.С.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Колпаков В.Н.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Комиссарова И.И.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Комлева Н.В.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Коновалов В.Л.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Коновалова С.С.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кононова С.А.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Коппалина А.А.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Корнейчук С.К.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИМЕиТ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Коровин А.Л.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Королёв Т.В.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Королева А.Н.",
+        status: "Старший преподаватель",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Королева И.В.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Корюкина С.В.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кострова О.Н.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Костюк А.В.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кочев А.А.",
+        status: "Преподаватель",
+        demanding: "Низкая",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Кочкарева Т.А.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИПиП",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кочкин А.А.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Кочкин Д.В.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Кочкин Н.А.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Кошелева Ж.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кошутин Д.В.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Красиков А.Н.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Красильникова И.С.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИПиП",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кремлева Н.А.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кривошеев Д.М.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Крутиков А.А.",
+        status: "Старший преподаватель",
+        demanding: "Высокая",
+        institute: "ИСиГН",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Крылов Н.А.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Крылова А.Н.",
+        status: "Преподаватель",
+        demanding: "Низкая",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Крылова Е.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Крюкова А.Л.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Крюкова Д.Ю.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кряквина П.Ю.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кузина Л.А.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кузичев С.А.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Кузнецов А.Н.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИМЕиТ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Кузнецова О.Б.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кузнецова О.Н.",
+        status: "Преподаватель",
+        demanding: "Низкая",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кузьминых А.Л.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Кулева Н.И.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Куляшова Т.И.",
+        status: "Преподаватель",
+        demanding: "Низкая",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Куницкий В.А.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Курганова Д.А.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Курилова Н.В.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кустова И.А.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИПиП",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Кучин О.Р.",
+        status: "Ассистент",
+        demanding: "Средняя",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Кушнерев А.А.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Корзина А.А.",
+        status: "Старший преподаватель",
+        demanding: "Высокая",
+        institute: "ИСиГН",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Лачина В.И.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Лебедев С.А.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Лебедева Д.В.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Лебедева Е.А.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Левичев А.А.",
+        status: "Преподаватель",
+        demanding: "Низкая",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Ленин Р.С.",
+        status: "Старший преподаватель",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Лихачева О.И.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Лоскутов А.Н.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Лукин С.В.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИМЕиТ",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Луценко Е.В.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Люлина Е.Н.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Майорова Л.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Макаровский М.А.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Макарьин А.А.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Макеева И.А.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Маклахов А.В.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИМЕиТ",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Маковеев В.Н.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Максутова Н.К.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИПиП",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Малахов А.Н.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Малахов Р.А.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Малахова Н.В.",
+        status: "Доктор наук",
+        demanding: "Высокая",
+        institute: "ИСиГН",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Малованина Л.А.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Малышева С.С.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Мальцева А.В.",
+        status: "Старший преподаватель",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Марагаева З.С.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Марина И.В.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Марченко Л.А.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Матвеев А.В.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Махлин М.В.",
+        status: "Педагог дополнительного образования",
+        demanding: "Низкая",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Машкин А.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИМЕиТ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Мелентьева Н.Н.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Мельничук Н.Ю.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Меньщикова Л.А.",
+        status: "Старший преподаватель",
+        demanding: "Высокая",
+        institute: "ИСИ",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Метляхин А.И.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Мещеряков В.Е.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Мизинцева О.И.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Милавина Ю.С.",
+        status: "Педагог дополнительного образования",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Минаев А.Л.",
+        status: "Преподаватель",
+        demanding: "Низкая",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Митрофанова А.Г.",
+        status: "Старший преподаватель",
+        demanding: "Высокая",
+        institute: "ИПиП",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Михайлова М.Ю.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Михайлюк Т.В.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Михалевич Н.В.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИСиГН",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Мищенко Д.Н.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Монаркин Н.Н.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Моронова О.Г.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Москвина Е.В.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Москвина О.С.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Муратбекова И.С.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Мухамадиев Э.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИСиГН",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Мухин Д.А.",
+        status: "Старший преподаватель",
+        demanding: "Средняя",
+        institute: "ИУЭиЮ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Мухин И.А.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Мясникова С.А.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "УК",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Нагибина О.В.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИПиП",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Назарова М.А.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Наимов А.Н.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИМЕиКН",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Невгень А.С.",
+        status: "Преподаватель",
+        demanding: "Средняя",
+        institute: "ИСиГН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Немировский А.Е.",
+        status: "Профессор",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Никитина Е.М.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Никитина Н.А.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Никифоров В.Е.",
+        status: "Старший преподаватель",
+        demanding: "Высокая",
+        institute: "ИПиП",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Никулин А.В.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИСИ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Новосёлов А.М.",
+        status: "Старший преподаватель",
+        demanding: "Низкая",
+        institute: "ИМЕиКН",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Новосёлов А.С.",
+        status: "Доцент",
+        demanding: "Высокая",
+        institute: "ИСиГН",
+        behavior: "Особое",
+        rarity: "Эпическая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Носова Н.В.",
+        status: "Заведующий кафедрой",
+        demanding: "Высокая",
+        institute: "ИУЭиЮ",
+        behavior: "Особое",
+        rarity: "Легендарная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Оботуров А.В.",
+        status: "Доцент",
+        demanding: "Средняя",
+        institute: "ИМЕиТ",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    },
+    {
+        name: "Овсянникова Т.Г.",
+        status: "Доцент",
+        demanding: "Низкая",
+        institute: "УК",
+        behavior: "Дружелюбное",
+        rarity: "Обычная",
+        gender: "Женский",
+        availability: "Активен",
+        iconColor: "#e91e63"
+    },
+    {
+        name: "Оглуздин О.И.",
+        status: "Преподаватель",
+        demanding: "Высокая",
+        institute: "ИПиП",
+        behavior: "Особое",
+        rarity: "Редкая",
+        gender: "Мужской",
+        availability: "Активен",
+        iconColor: "#2196f3"
+    }
+];
+   
 
         // Переменные игры
         let currentTeacher = null;
@@ -1596,21 +4357,23 @@ function makeGuess() {
     resultsContainer.scrollTop = resultsContainer.scrollHeight;
     
     // Остальной код проверки победы/проигрыша
-    if (allCorrect) {
+    // В функции makeGuess() заменяем старый код победы на:
+if (allCorrect) {
     gameWon = true;
     hintElement.innerHTML = '<strong>Поздравляем!</strong> Вы угадали преподавателя!';
     guessBtn.disabled = true;
     teacherInput.disabled = true;
-    // Убираем вызов revealTeacher() так как характеристик в основном интерфейсе нет
-    createConfetti()
-        
-        const stats = JSON.parse(localStorage.getItem('teacherStats') || '{"wins":0,"total":0,"streak":0,"maxStreak":0}');
-        stats.wins++;
-        stats.total++;
-        stats.streak++;
-        if (stats.streak > stats.maxStreak) stats.maxStreak = stats.streak;
-        updateStats(stats);
-    } else if (attempts >= maxAttempts) {
+    
+    const stats = JSON.parse(localStorage.getItem('teacherStats') || '{"wins":0,"total":0,"streak":0,"maxStreak":0}');
+    stats.wins++;
+    stats.total++;
+    stats.streak++;
+    if (stats.streak > stats.maxStreak) stats.maxStreak = stats.streak;
+    updateStats(stats);
+    
+    // Показываем модальное окно победы
+    setTimeout(showWinModal, 500);
+} else if (attempts >= maxAttempts) {
         hintElement.textContent = `Игра окончена. Сегодняшний преподаватель: ${currentTeacher.name}. Возвращайтесь завтра!`;
         guessBtn.disabled = true;
         teacherInput.disabled = true;
@@ -1795,6 +4558,64 @@ function makeGuess() {
 
         // Инициализируем панель разработчика после загрузки игры
         setTimeout(initDevPanel, 1000);
+        // Добавляем переменные для модального окна
+const winModal = document.getElementById('win-modal');
+const winTeacherName = document.getElementById('win-teacher-name');
+const winAttemptsCount = document.getElementById('win-attempts-count');
+const winGuessCount = document.getElementById('win-guess-count');
+const closeWinModal = document.getElementById('close-win-modal');
+const closeModalBtn = document.querySelector('.close-modal');
+
+// Функция показа модального окна победы
+function showWinModal() {
+    winTeacherName.textContent = currentTeacher.name;
+    winAttemptsCount.textContent = attempts;
+    
+    // Обновляем счетчик угадавших этого преподавателя
+    const teacherStats = JSON.parse(localStorage.getItem('teacherWinStats') || '{}');
+    const teacherId = currentTeacher.name;
+    teacherStats[teacherId] = (teacherStats[teacherId] || 0) + 1;
+    localStorage.setItem('teacherWinStats', JSON.stringify(teacherStats));
+    
+    winGuessCount.textContent = `${teacherStats[teacherId]} ${getPeopleWord(teacherStats[teacherId])}`;
+    
+    winModal.style.display = 'block';
+    createConfetti();
+}
+
+// Функция для правильного склонения слова "человек"
+function getPeopleWord(count) {
+    if (count % 10 === 1 && count % 100 !== 11) {
+        return 'человек';
+    } else if ([2, 3, 4].includes(count % 10) && ![12, 13, 14].includes(count % 100)) {
+        return 'человека';
+    } else {
+        return 'человек';
+    }
+}
+
+// Функция скрытия модального окна
+function hideWinModal() {
+    winModal.style.display = 'none';
+}
+
+// Обработчики для закрытия модального окна
+closeWinModal.addEventListener('click', hideWinModal);
+closeModalBtn.addEventListener('click', hideWinModal);
+
+// Закрытие модального окна при клике вне его
+winModal.addEventListener('click', function(event) {
+    if (event.target === winModal) {
+        hideWinModal();
+    }
+});
+
+// Закрытие модального окна по ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && winModal.style.display === 'block') {
+        hideWinModal();
+    }
+});
     </script>
 </body>
 </html>
